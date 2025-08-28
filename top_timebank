@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>TimeBank Firebase Demo</title>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="firebase.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #fafafa; }
+        h1 { color: #2c3e50; }
+        .container { max-width: 500px; margin: auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+        label { font-weight: bold; }
+        input, select, button { margin-bottom: 12px; width: 100%; padding: 8px; }
+        button { background: #3498db; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        button:disabled { background: #ccc; }
+        .hide { display: none; }
+        #user-info { margin-bottom: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TimeBank Firebase Demo</h1>
+        <div id="user-info" class="hide">
+            Bem-vindo, <span id="user-email"></span>! Saldo: <span id="user-balance"></span> horas
+            <button onclick="logout()">Sair</button>
+        </div>
+        <div id="auth-section">
+            <h2>Cadastro / Login</h2>
+            <input type="email" id="email" placeholder="E-mail">
+            <input type="password" id="password" placeholder="Senha">
+            <button onclick="signup()">Cadastrar</button>
+            <button onclick="login()">Entrar</button>
+            <div id="auth-msg"></div>
+        </div>
+        <div id="bank-section" class="hide">
+            <h2>Operações</h2>
+            <label>Depósito de horas:</label>
+            <input type="number" id="deposit-amount" min="0.1" step="0.1" placeholder="Horas">
+            <button onclick="deposit()">Depositar</button>
+            <br>
+            <label>Saque de horas:</label>
+            <input type="number" id="withdraw-amount" min="0.1" step="0.1" placeholder="Horas">
+            <button onclick="withdraw()">Sacar</button>
+            <br>
+            <label>Transferência:</label>
+            <input type="email" id="transfer-email" placeholder="E-mail do destinatário">
+            <input type="number" id="transfer-amount" min="0.1" step="0.1" placeholder="Horas">
+            <button onclick="transfer()">Transferir</button>
+            <br>
+            <label>Serviço:</label>
+            <select id="service-type">
+                <option value="Limpeza">Limpeza</option>
+                <option value="Cuidado">Cuidado</option>
+                <option value="Serviço Geral">Serviço Geral</option>
+            </select>
+            <input type="number" id="service-hours" min="0.1" step="0.1" placeholder="Horas para serviço">
+            <button onclick="service()">Registrar serviço</button>
+            <br>
+            <div id="bank-msg"></div>
+        </div>
+    </div>
+</body>
+</html>
